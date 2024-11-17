@@ -6,6 +6,7 @@ import com.example.lucasigor.repositories.VolunteerRepository;
 import com.example.lucasigor.services.VolunteerService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,5 +34,13 @@ public class VolunteerController {
     @PostMapping
     public Volunteer create(@Valid @RequestBody Volunteer volunteer) {
         return volunteerService.save(volunteer);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Volunteer> updateVolunteer(
+            @PathVariable Long id,
+            @Valid @RequestBody Volunteer volunteer) {
+        Volunteer updatedVolunteer = volunteerService.update(id, volunteer);
+        return ResponseEntity.ok(updatedVolunteer);
     }
 }
