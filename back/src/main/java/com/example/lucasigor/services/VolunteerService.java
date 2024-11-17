@@ -24,4 +24,9 @@ public class VolunteerService {
         Optional<Volunteer> result = volunteerRepository.findById(id);
         return  result.orElseThrow(()-> new RuntimeException("Voluntário não encontrado"));
     }
+
+    //POST - New volunteer
+    public Volunteer save(Volunteer volunteer) {
+        return volunteerRepository.save(volunteer);
+    }
 }

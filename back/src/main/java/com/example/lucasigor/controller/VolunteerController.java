@@ -5,10 +5,7 @@ import com.example.lucasigor.entities.Volunteer;
 import com.example.lucasigor.repositories.VolunteerRepository;
 import com.example.lucasigor.services.VolunteerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,5 +28,9 @@ public class VolunteerController {
     @GetMapping(value = "/{id}")
     public Volunteer findById(@PathVariable Long id) {
         return volunteerService.findById(id);
+    }
+    @PostMapping
+    public Volunteer create(@RequestBody Volunteer volunteer) {
+        return volunteerService.save(volunteer);
     }
 }
