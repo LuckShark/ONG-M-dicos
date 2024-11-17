@@ -4,6 +4,7 @@ package com.example.lucasigor.controller;
 import com.example.lucasigor.entities.Volunteer;
 import com.example.lucasigor.repositories.VolunteerRepository;
 import com.example.lucasigor.services.VolunteerService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,7 @@ public class VolunteerController {
         return volunteerService.findById(id);
     }
     @PostMapping
-    public Volunteer create(@RequestBody Volunteer volunteer) {
+    public Volunteer create(@Valid @RequestBody Volunteer volunteer) {
         return volunteerService.save(volunteer);
     }
 }
