@@ -48,4 +48,11 @@ public class VolunteerController {
         Volunteer updatedVolunteer = volunteerService.update(id, volunteer);
         return ResponseEntity.ok(updatedVolunteer);
     }
+
+    @DeleteMapping(value = "/{id}")
+    @Operation(summary = "Excluir voluntário", description = "Exclui um voluntário pelo Id")
+    public ResponseEntity<Void> deleteVolunteer(@PathVariable Long id) {
+        volunteerService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

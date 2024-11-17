@@ -46,5 +46,14 @@ public class VolunteerService {
         return volunteerRepository.save(existingVolunteer);
     }
 
+    //DELETE - Excluir voluntário
+
+    public void delete(Long id) {
+        if (!volunteerRepository.existsById(id)){
+            throw new ResourceNotFoundException("Voluntário não encontrado com o id: " + id);
+        }
+        volunteerRepository.deleteById(id);
+    }
+
 
 }
