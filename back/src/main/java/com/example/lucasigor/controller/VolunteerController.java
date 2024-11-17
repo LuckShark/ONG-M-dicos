@@ -3,6 +3,7 @@ package com.example.lucasigor.controller;
 
 import com.example.lucasigor.entities.Volunteer;
 import com.example.lucasigor.repositories.VolunteerRepository;
+import com.example.lucasigor.services.VolunteerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,12 +16,14 @@ import java.util.List;
 public class VolunteerController {
 
     //Injeção de dependencia
+    //@Autowired
+    //private VolunteerRepository repository; AGORA VAMOS USAR O SERVICE
+
     @Autowired
-    private VolunteerRepository repository;
+    private VolunteerService volunteerService;
 
     @GetMapping
     public List<Volunteer> findAll() {
-        List<Volunteer> result = repository.findAll();
-        return result;
+        return volunteerService.findAll();
     }
 }

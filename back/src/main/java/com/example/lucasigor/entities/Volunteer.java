@@ -9,15 +9,10 @@ public class Volunteer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
-
     private String email;
-
     private String cpf;
-
     private String matricula;
-
     private String instituicaoEnsino;
 
     @ManyToOne
@@ -26,6 +21,18 @@ public class Volunteer {
 
     public Volunteer() {
     }
+
+    public Volunteer(Long id, String name, String email, String cpf, String matricula, String instituicaoEnsino, Service service) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.cpf = cpf;
+        this.matricula = matricula;
+        this.instituicaoEnsino = instituicaoEnsino;
+        this.service = service;
+    }
+
+    //GETTERS & SETTERS
 
     public Long getId() {
         return id;
