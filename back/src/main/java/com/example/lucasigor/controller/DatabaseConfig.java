@@ -42,6 +42,7 @@ public class DatabaseConfig {
             volunteer1.setEmail("maria@gmail.com");
             volunteer1.setCpf("12345678901");
             volunteer1.setMatricula("20230001");
+            volunteer1.setPassword("1234567");
             volunteer1.setInstituicaoEnsino("Instituição de Ensino A");
 
             Volunteer volunteer2 = new Volunteer();
@@ -51,6 +52,7 @@ public class DatabaseConfig {
             volunteer2.setCpf("98765432100");
             volunteer2.setMatricula("20230002");
             volunteer2.setInstituicaoEnsino("Instituição de Ensino B");
+            volunteer2.setPassword("1234567");
 
             Volunteer volunteer3 = new Volunteer();
             volunteer3.setService(voluntWork2);
@@ -59,6 +61,7 @@ public class DatabaseConfig {
             volunteer3.setCpf("45678912300");
             volunteer3.setMatricula("20230003");
             volunteer3.setInstituicaoEnsino("Instituição de Ensino C");
+            volunteer3.setPassword("1234567");
 
             Volunteer volunteer4 = new Volunteer();
             volunteer4.setService(voluntWork2);
@@ -67,6 +70,7 @@ public class DatabaseConfig {
             volunteer4.setCpf("78912345600");
             volunteer4.setMatricula("20230004");
             volunteer4.setInstituicaoEnsino("Instituição de Ensino D");
+            volunteer4.setPassword("1234567");
 
             volunteerRepository.save(volunteer1);
             volunteerRepository.save(volunteer2);

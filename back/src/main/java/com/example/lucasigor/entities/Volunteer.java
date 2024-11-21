@@ -25,6 +25,11 @@ public class Volunteer {
     @NotBlank(message = "Instituição de Ensino é obrigatória")
     private String instituicaoEnsino;
 
+    //Novo campo: SENHA
+    @NotBlank(message = "Senha é obrigatória")
+    @Size(min = 6, message = "Senha deve ter no mínimo 6 caracteres")
+    private String password;
+
     @ManyToOne
     @JoinColumn(name = "service_id")
     private VoluntWork voluntWork;
@@ -32,13 +37,14 @@ public class Volunteer {
     public Volunteer() {
     }
 
-    public Volunteer(Long id, String name, String email, String cpf, String matricula, String instituicaoEnsino, VoluntWork voluntWork) {
+    public Volunteer(Long id, String name, String email, String cpf, String matricula, String instituicaoEnsino, String password , VoluntWork voluntWork) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.cpf = cpf;
         this.matricula = matricula;
         this.instituicaoEnsino = instituicaoEnsino;
+        this.password = password;
         this.voluntWork = voluntWork;
     }
 
@@ -90,6 +96,14 @@ public class Volunteer {
 
     public void setInstituicaoEnsino(String instituicaoEnsino) {
         this.instituicaoEnsino = instituicaoEnsino;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public VoluntWork getService() {
