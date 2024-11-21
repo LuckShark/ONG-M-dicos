@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 public class SwaggerConfig {
 
     @Bean
-    public OpenAPI customOpenAPI() {
+    public OpenAPI customOpenAPI() { //NADA DISSO AQUI FUNCIONOU, TIVE QUE FAZER NA APPLICATION.JAVA
         return new OpenAPI()
                 .info(new Info()
                         .title("API de Médicos Internos")
