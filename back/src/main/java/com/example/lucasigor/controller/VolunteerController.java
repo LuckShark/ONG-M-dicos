@@ -36,6 +36,7 @@ public class VolunteerController {
     public Volunteer findById(@PathVariable Long id) {
         return volunteerService.findById(id);
     }
+
     @PostMapping
     @Operation(summary = "Cadastrar Voluntário", description = "Cria um novo voluntário")
     public Volunteer create(@Valid @RequestBody Volunteer volunteer) {
@@ -53,7 +54,7 @@ public class VolunteerController {
 
     @DeleteMapping(value = "/{id}")
     @Operation(summary = "Excluir voluntário", description = "Exclui um voluntário pelo Id")
-    public ResponseEntity<Void> deleteVolunteer(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteVoluntWork(@PathVariable Long id) {
         volunteerService.delete(id);
         return ResponseEntity.noContent().build();
     }
