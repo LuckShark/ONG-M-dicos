@@ -27,19 +27,19 @@ public class Volunteer {
 
     @ManyToOne
     @JoinColumn(name = "service_id")
-    private Service service;
+    private VoluntWork voluntWork;
 
     public Volunteer() {
     }
 
-    public Volunteer(Long id, String name, String email, String cpf, String matricula, String instituicaoEnsino, Service service) {
+    public Volunteer(Long id, String name, String email, String cpf, String matricula, String instituicaoEnsino, VoluntWork voluntWork) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.cpf = cpf;
         this.matricula = matricula;
         this.instituicaoEnsino = instituicaoEnsino;
-        this.service = service;
+        this.voluntWork = voluntWork;
     }
 
     //GETTERS & SETTERS
@@ -92,11 +92,11 @@ public class Volunteer {
         this.instituicaoEnsino = instituicaoEnsino;
     }
 
-    public Service getService() {
-        return service;
+    public VoluntWork getService() {
+        return voluntWork;
     }
 
-    public void setService(Service service) {
-        this.service = service;
+    public void setService(VoluntWork voluntWork) {
+        this.voluntWork = voluntWork;
     }
 }

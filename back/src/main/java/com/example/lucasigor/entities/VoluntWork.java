@@ -2,22 +2,33 @@ package com.example.lucasigor.entities;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tb_service")
-public class Service {
+public class VoluntWork {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Nome do Serviço é obrigatório")
     private String serviceName;
 
+    @NotBlank(message = "Descrição do Serviço é obrigatório")
     private String description;
 
+    @NotBlank(message = "Instituição é obrigatória")
     private String instituicaoSaude;
 
-    public Service() {
+    public VoluntWork() {
+    }
+
+    public VoluntWork(Long id, String serviceName, String description, String instituicaoSaude) {
+        this.id = id;
+        this.serviceName = serviceName;
+        this.description = description;
+        this.instituicaoSaude = instituicaoSaude;
     }
 
     public Long getId() {

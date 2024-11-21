@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/volunteers")
-@Tag(name = "Volunteers", description = "Endpoints para gerenciar Voluntários")
+@Tag(name = "Internos (voluntários)", description = "Endpoints para gerenciar Voluntários da saúde")
 public class VolunteerController {
 
     //Injeção de dependencia
@@ -26,11 +26,13 @@ public class VolunteerController {
     private VolunteerService volunteerService;
 
     @GetMapping
+    @Operation(summary = "Lista todos os voluntários cadastrados")
     public List<Volunteer> findAll() {
         return volunteerService.findAll();
     }
 
     @GetMapping(value = "/{id}")
+    @Operation(summary = "Pesquisa um voluntário pelo ID")
     public Volunteer findById(@PathVariable Long id) {
         return volunteerService.findById(id);
     }
