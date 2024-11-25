@@ -24,11 +24,9 @@ public class VoluntWorkEnrollment {
     private Integer vagas;
 
     @NotNull(message = "Insira uma data inicial válida")
-    @Temporal(TemporalType.DATE)
     private Date startDate;
 
     @NotNull(message = "Insira uma data final válida")
-    @Temporal(TemporalType.DATE)
     private Date endDate;
 
     public VoluntWorkEnrollment() {

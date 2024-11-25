@@ -1,12 +1,18 @@
 package com.example.lucasigor.controller;
 
 import com.example.lucasigor.entities.VoluntWork;
+import com.example.lucasigor.entities.VoluntWorkEnrollment;
 import com.example.lucasigor.entities.Volunteer;
+import com.example.lucasigor.repositories.VoluntWorkEnrollmentRepository;
 import com.example.lucasigor.repositories.VoluntWorkRepository;
 import com.example.lucasigor.repositories.VolunteerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 
 
 @Configuration
@@ -14,27 +20,40 @@ public class DatabaseConfig {
 
     private final VoluntWorkRepository voluntWorkRepository;
     private final VolunteerRepository volunteerRepository;
+    private final VoluntWorkEnrollmentRepository voluntWorkEnrollmentRepository;
 
-    public DatabaseConfig(VoluntWorkRepository voluntWorkRepository, VolunteerRepository volunteerRepository) {
+    public DatabaseConfig(VoluntWorkRepository voluntWorkRepository, VolunteerRepository volunteerRepository,
+                          VoluntWorkEnrollmentRepository voluntWorkEnrollmentRepository) {
         this.voluntWorkRepository = voluntWorkRepository;
         this.volunteerRepository = volunteerRepository;
+        this.voluntWorkEnrollmentRepository = voluntWorkEnrollmentRepository;
     }
 
     @Bean
     public CommandLineRunner loadData() {
         return args -> {
+
+            // Negócio pra ajeitar a data
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+
+            //TRABALHOS VOLUNTÁRIOS
+
             VoluntWork voluntWork1 = new VoluntWork();
-            voluntWork1.setServiceName("Nome do Serviço 1");
-            voluntWork1.setDescription("Descrição do Serviço 1");
-            voluntWork1.setInstituicaoSaude("Instituição de Saúde 1");
+            voluntWork1.setServiceName("Apoio da Campanha de Vaciação");
+            voluntWork1.setDescription("Auxiliar no registro e organização durante a campanha");
+            voluntWork1.setInstituicaoSaude("Hospital Público da UFC");
 
             VoluntWork voluntWork2 = new VoluntWork();
-            voluntWork2.setServiceName("Nome do Serviço 2");
-            voluntWork2.setDescription("Descrição do Serviço 2");
-            voluntWork2.setInstituicaoSaude("Instituição de Saúde 2");
+            voluntWork2.setServiceName("Atendimento em Clínica");
+            voluntWork2.setDescription("Realizar triagem e organização em eventos em clínica comunitária");
+            voluntWork2.setInstituicaoSaude("Clínica Comunitária do Bairro do Igor");
 
             voluntWorkRepository.save(voluntWork1);
             voluntWorkRepository.save(voluntWork2);
+
+            //VOLUNTÁRIOS (internos)
 
             Volunteer volunteer1 = new Volunteer();
             volunteer1.setService(voluntWork1);
@@ -76,6 +95,34 @@ public class DatabaseConfig {
             volunteerRepository.save(volunteer2);
             volunteerRepository.save(volunteer3);
             volunteerRepository.save(volunteer4);
+
+            //INSCRIÇÕES (VoluntWorkEnrollment)
+
+            Date startDate1 = dateFormat.parse("2024-10-12");
+            Date endDate1 = dateFormat.parse("2024-11-12");
+
+            VoluntWorkEnrollment enrollment1 = new VoluntWorkEnrollment();
+            enrollment1.setVoluntWork(voluntWork1);
+            enrollment1.setVolunteer(volunteer1);
+            enrollment1.setVagas(10);
+            enrollment1.setStartDate(startDate1);
+            enrollment1.setEndDate(endDate1);
+
+            voluntWorkEnrollmentRepository.save(enrollment1);
+
+            Date startDate2 = dateFormat.parse("2024-12-01");
+            Date endDate2 = dateFormat.parse("2025-01-15");
+
+            VoluntWorkEnrollment enrollment2 = new VoluntWorkEnrollment();
+            enrollment2.setVoluntWork(voluntWork2);
+            enrollment2.setVolunteer(volunteer2);
+            enrollment2.setVagas(5);
+            enrollment2.setStartDate(startDate2);
+            enrollment2.setEndDate(endDate2);
+
+
+            voluntWorkEnrollmentRepository.save(enrollment2);
+
         };
     }
 }
