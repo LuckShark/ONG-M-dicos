@@ -1,7 +1,7 @@
 package com.example.lucasigor.controller;
 
-import com.example.lucasigor.entities.VoluntWork;
-import com.example.lucasigor.services.VoluntWorkService;
+import com.example.lucasigor.entities.Work;
+import com.example.lucasigor.services.WorkService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -12,35 +12,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/services")
+@RequestMapping(value = "/work")
 @Tag(name = "Trabalhos", description = "Endpoints para gerenciar os Trabalhos disponíveis")
-public class VoluntWorkController {
+public class WorkController {
 
     @Autowired
-    private VoluntWorkService voluntWorkService;
+    private WorkService service;
 
     @GetMapping
     @Operation(summary = "Lista todos os trabalhos")
-    public List<VoluntWork> findAll() {
-        return voluntWorkService.findAll();
+    public List<Work> findAll() {
+        return service.findAll();
     }
 
     @GetMapping(value = "/{id}")
     @Operation(summary = "Pesquisa um trabalho pelo ID")
-    public VoluntWork findById(@PathVariable Long id) {
-        return voluntWorkService.findById(id);
+    public Work findById(@PathVariable Long id) {
+        return service.findById(id);
     }
 
     @PostMapping
     @Operation(summary = "Cadastrar Trabalho", description = "Cria um novo trabalho")
-    public VoluntWork create(@Valid @RequestBody VoluntWork voluntWork) {
-        return voluntWorkService.save(voluntWork);
+    public Work create(@Valid @RequestBody Work work) {
+        return service.save(work);
     }
 
     @DeleteMapping(value = "/{id}")
     @Operation(summary = "Excluir trabalho", description = "Exclui um trabalho pelo Id")
     public ResponseEntity<Void> deleteVoluntWork(@PathVariable Long id) {
-        voluntWorkService.delete(id);
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
 

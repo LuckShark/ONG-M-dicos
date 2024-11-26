@@ -1,6 +1,6 @@
 package com.example.lucasigor.entities;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -17,8 +17,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "tb_service")
-public class VoluntWork {
+@Table(name = "tb_work")
+public class Work {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +42,8 @@ public class VoluntWork {
     @NotNull(message = "Insira uma data final válida")
     private Date endDate;
 
-    @OneToMany(mappedBy = "voluntWork", cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "work", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private List<Volunteer> volunteers = new ArrayList<>();
+    @JsonIgnoreProperties("work")
+    private List<WorkVolunteer> workVolunteers = new ArrayList<>();
 }

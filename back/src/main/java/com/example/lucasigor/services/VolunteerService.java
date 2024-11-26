@@ -13,27 +13,27 @@ import java.util.Optional;
 public class VolunteerService {
 
     @Autowired
-    private VolunteerRepository volunteerRepository;
+    private VolunteerRepository repository;
 
     //GET ALL
     public List<Volunteer> findAll() {
-        return volunteerRepository.findAll();
+        return repository.findAll();
     }
 
     //GET BY ID
     public Volunteer findById(Long id) {
-        Optional<Volunteer> result = volunteerRepository.findById(id);
+        Optional<Volunteer> result = repository.findById(id);
         return result.orElseThrow(() -> new RuntimeException("Voluntário não encontrado"));
     }
 
     //POST - New volunteer
     public Volunteer save(Volunteer volunteer) {
-        return volunteerRepository.save(volunteer);
+        return repository.save(volunteer);
     }
 
     //PUT - Update volunteer
     public Volunteer update(Long id, Volunteer updatedVolunteer) {
-        Volunteer existingVolunteer = volunteerRepository.findById(id)
+        Volunteer existingVolunteer = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Voluntário não encontrado com id: " + id));
 
         existingVolunteer.setName(updatedVolunteer.getName());
@@ -42,15 +42,15 @@ public class VolunteerService {
         existingVolunteer.setMatricula(updatedVolunteer.getMatricula());
         existingVolunteer.setInstituicaoEnsino(updatedVolunteer.getInstituicaoEnsino());
 
-        return volunteerRepository.save(existingVolunteer);
+        return repository.save(existingVolunteer);
     }
 
     //DELETE - Excluir voluntário
     public void delete(Long id) {
-        if (!volunteerRepository.existsById(id)) {
+        if (!repository.existsById(id)) {
             throw new ResourceNotFoundException("Voluntário não encontrado com o id: " + id);
         }
-        volunteerRepository.deleteById(id);
+        repository.deleteById(id);
     }
 
 

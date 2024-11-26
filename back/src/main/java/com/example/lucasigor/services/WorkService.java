@@ -1,8 +1,8 @@
 package com.example.lucasigor.services;
 
-import com.example.lucasigor.entities.VoluntWork;
+import com.example.lucasigor.entities.Work;
 import com.example.lucasigor.exceptions.ResourceNotFoundException;
-import com.example.lucasigor.repositories.VoluntWorkRepository;
+import com.example.lucasigor.repositories.WorkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,33 +10,33 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class VoluntWorkService {
+public class WorkService {
 
     @Autowired
-    private VoluntWorkRepository voluntWorkRepository;
+    private WorkRepository repository;
 
     //GET ALL jobs
-    public List<VoluntWork> findAll() {
-        return voluntWorkRepository.findAll();
+    public List<Work> findAll() {
+        return repository.findAll();
     }
 
     //GET job BY ID
-    public VoluntWork findById(Long id) {
-        Optional<VoluntWork> result = voluntWorkRepository.findById(id);
+    public Work findById(Long id) {
+        Optional<Work> result = repository.findById(id);
         return result.orElseThrow(() -> new RuntimeException("Trabalho não encontrado"));
     }
 
     //POST - New Job
-    public VoluntWork save(VoluntWork voluntWork) {
-        return voluntWorkRepository.save(voluntWork);
+    public Work save(Work work) {
+        return repository.save(work);
     }
 
     //DELETE - Excluir Job
     public void delete(Long id) {
-        if (!voluntWorkRepository.existsById(id)) {
+        if (!repository.existsById(id)) {
             throw new ResourceNotFoundException("Trabalho não encontrado com o id: " + id);
         }
-        voluntWorkRepository.deleteById(id);
+        repository.deleteById(id);
     }
 
 }
