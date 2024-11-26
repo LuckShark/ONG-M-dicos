@@ -1,7 +1,6 @@
 package com.example.lucasigor.services;
 
 import com.example.lucasigor.entities.VoluntWorkEnrollment;
-import com.example.lucasigor.entities.Volunteer;
 import com.example.lucasigor.repositories.VoluntWorkEnrollmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,9 +31,8 @@ public class VoluntWorkEnrollmentService {
     //PUT
     public VoluntWorkEnrollment update(Long id, VoluntWorkEnrollment enrollment) {
         VoluntWorkEnrollment existing = findById(id);
-        existing.setVolunteer(enrollment.getVolunteer());
+        existing.setVolunteers(enrollment.getVolunteers());
         existing.setVoluntWork(enrollment.getVoluntWork());
-        existing.setVagas(enrollment.getVagas());
         existing.setStartDate(enrollment.getStartDate());
         existing.setEndDate(enrollment.getEndDate());
         return repository.save(existing);

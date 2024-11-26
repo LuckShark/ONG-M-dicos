@@ -17,6 +17,7 @@ public class VoluntWorkEnrollmentController {
 
     @GetMapping
     public ResponseEntity<List<VoluntWorkEnrollment>> findAll() {
+
         return ResponseEntity.ok(service.findAll());
     }
 

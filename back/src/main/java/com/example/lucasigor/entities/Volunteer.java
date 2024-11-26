@@ -1,5 +1,6 @@
 package com.example.lucasigor.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -24,6 +25,11 @@ public class Volunteer {
     private String matricula;
     @NotBlank(message = "Instituição de Ensino é obrigatória")
     private String instituicaoEnsino;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "voluntWorkEnrollment_id", nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private VoluntWorkEnrollment voluntWorkEnrollment;
 
     //Novo campo: SENHA
     @NotBlank(message = "Senha é obrigatória")

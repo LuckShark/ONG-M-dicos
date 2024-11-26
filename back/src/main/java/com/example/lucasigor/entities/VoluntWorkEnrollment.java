@@ -3,7 +3,10 @@ package com.example.lucasigor.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tb_volunt_work_enrollment")
@@ -13,15 +16,11 @@ public class VoluntWorkEnrollment {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "volunteer_id", nullable = false)
-    private Volunteer volunteer;
-
-    @ManyToOne
     @JoinColumn(name = "volunt_work_id", nullable = false)
     private VoluntWork voluntWork;
 
-    @NotNull(message = "O número de vagas é obrigatório")
-    private Integer vagas;
+    @OneToMany(mappedBy = "voluntWorkEnrollment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Volunteer> volunteers = new ArrayList<>();
 
     @NotNull(message = "Insira uma data inicial válida")
     private Date startDate;
@@ -32,11 +31,10 @@ public class VoluntWorkEnrollment {
     public VoluntWorkEnrollment() {
     }
 
-    public VoluntWorkEnrollment(Long id, Volunteer volunteer, VoluntWork voluntWork, Integer vagas, Date startDate, Date endDate) {
+    public VoluntWorkEnrollment(Long id, VoluntWork voluntWork, List<Volunteer> volunteers, Date startDate, Date endDate) {
         this.id = id;
-        this.volunteer = volunteer;
         this.voluntWork = voluntWork;
-        this.vagas = vagas;
+        this.volunteers = volunteers;
         this.startDate = startDate;
         this.endDate = endDate;
     }
@@ -51,12 +49,12 @@ public class VoluntWorkEnrollment {
         this.id = id;
     }
 
-    public Volunteer getVolunteer() {
-        return volunteer;
+    public List<Volunteer> getVolunteers() {
+        return volunteers;
     }
 
-    public void setVolunteer(Volunteer volunteer) {
-        this.volunteer = volunteer;
+    public void setVolunteers(List<Volunteer> volunteers) {
+        this.volunteers = volunteers;
     }
 
     public VoluntWork getVoluntWork() {
@@ -67,13 +65,6 @@ public class VoluntWorkEnrollment {
         this.voluntWork = voluntWork;
     }
 
-    public Integer getVagas() {
-        return vagas;
-    }
-
-    public void setVagas(Integer vagas) {
-        this.vagas = vagas;
-    }
 
     public Date getStartDate() {
         return startDate;
@@ -89,5 +80,18 @@ public class VoluntWorkEnrollment {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VoluntWorkEnrollment that = (VoluntWorkEnrollment) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
