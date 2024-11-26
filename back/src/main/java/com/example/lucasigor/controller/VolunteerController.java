@@ -2,7 +2,6 @@ package com.example.lucasigor.controller;
 
 
 import com.example.lucasigor.entities.Volunteer;
-import com.example.lucasigor.repositories.VolunteerRepository;
 import com.example.lucasigor.services.VolunteerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,10 +16,6 @@ import java.util.List;
 @RequestMapping(value = "/volunteers")
 @Tag(name = "Internos (voluntários)", description = "Endpoints para gerenciar Voluntários da saúde")
 public class VolunteerController {
-
-    //Injeção de dependencia
-    //@Autowired
-    //private VolunteerRepository repository; AGORA VAMOS USAR O SERVICE
 
     @Autowired
     private VolunteerService volunteerService;

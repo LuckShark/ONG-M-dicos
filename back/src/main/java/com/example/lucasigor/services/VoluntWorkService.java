@@ -23,7 +23,7 @@ public class VoluntWorkService {
     //GET job BY ID
     public VoluntWork findById(Long id) {
         Optional<VoluntWork> result = voluntWorkRepository.findById(id);
-        return  result.orElseThrow(()-> new RuntimeException("Trabalho não encontrado"));
+        return result.orElseThrow(() -> new RuntimeException("Trabalho não encontrado"));
     }
 
     //POST - New Job
@@ -33,7 +33,7 @@ public class VoluntWorkService {
 
     //DELETE - Excluir Job
     public void delete(Long id) {
-        if (!voluntWorkRepository.existsById(id)){
+        if (!voluntWorkRepository.existsById(id)) {
             throw new ResourceNotFoundException("Trabalho não encontrado com o id: " + id);
         }
         voluntWorkRepository.deleteById(id);

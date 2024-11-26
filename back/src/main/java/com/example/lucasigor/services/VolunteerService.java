@@ -23,7 +23,7 @@ public class VolunteerService {
     //GET BY ID
     public Volunteer findById(Long id) {
         Optional<Volunteer> result = volunteerRepository.findById(id);
-        return  result.orElseThrow(()-> new RuntimeException("Voluntário não encontrado"));
+        return result.orElseThrow(() -> new RuntimeException("Voluntário não encontrado"));
     }
 
     //POST - New volunteer
@@ -41,14 +41,13 @@ public class VolunteerService {
         existingVolunteer.setCpf(updatedVolunteer.getCpf());
         existingVolunteer.setMatricula(updatedVolunteer.getMatricula());
         existingVolunteer.setInstituicaoEnsino(updatedVolunteer.getInstituicaoEnsino());
-        existingVolunteer.setService(updatedVolunteer.getService());
 
         return volunteerRepository.save(existingVolunteer);
     }
 
     //DELETE - Excluir voluntário
     public void delete(Long id) {
-        if (!volunteerRepository.existsById(id)){
+        if (!volunteerRepository.existsById(id)) {
             throw new ResourceNotFoundException("Voluntário não encontrado com o id: " + id);
         }
         volunteerRepository.deleteById(id);

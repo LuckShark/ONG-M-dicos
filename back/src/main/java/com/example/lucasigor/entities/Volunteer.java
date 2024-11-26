@@ -1,122 +1,54 @@
 package com.example.lucasigor.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.Fetch;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "tb_volunteer")
 public class Volunteer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotBlank(message = "Nome é obrigatório")
     private String name;
+
     @Email(message = "Formato de email inválido")
     @NotBlank(message = "Email é obrigatório")
     private String email;
+
     @NotBlank(message = "CPF é obrigatório")
     @Size(min = 11, max = 11, message = "CPF deve ter 11 caracteres")
     private String cpf;
+
     @NotBlank(message = "Matrícula é obrigatória")
     private String matricula;
+
     @NotBlank(message = "Instituição de Ensino é obrigatória")
     private String instituicaoEnsino;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "voluntWorkEnrollment_id", nullable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private VoluntWorkEnrollment voluntWorkEnrollment;
-
-    //Novo campo: SENHA
     @NotBlank(message = "Senha é obrigatória")
     @Size(min = 6, message = "Senha deve ter no mínimo 6 caracteres")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "service_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private VoluntWork voluntWork;
-
-    public Volunteer() {
-    }
-
-    public Volunteer(Long id, String name, String email, String cpf, String matricula, String instituicaoEnsino, String password , VoluntWork voluntWork) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.cpf = cpf;
-        this.matricula = matricula;
-        this.instituicaoEnsino = instituicaoEnsino;
-        this.password = password;
-        this.voluntWork = voluntWork;
-    }
-
-    //GETTERS & SETTERS
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getMatricula() {
-        return matricula;
-    }
-
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
-    }
-
-    public String getInstituicaoEnsino() {
-        return instituicaoEnsino;
-    }
-
-    public void setInstituicaoEnsino(String instituicaoEnsino) {
-        this.instituicaoEnsino = instituicaoEnsino;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public VoluntWork getService() {
-        return voluntWork;
-    }
-
-    public void setService(VoluntWork voluntWork) {
-        this.voluntWork = voluntWork;
-    }
 }

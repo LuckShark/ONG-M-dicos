@@ -1,11 +1,22 @@
 package com.example.lucasigor.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "tb_service")
 public class VoluntWork {
 
@@ -25,54 +36,13 @@ public class VoluntWork {
     @NotNull(message = "O número de vagas é obrigatório")
     private Integer vagas;
 
-    public VoluntWork() {
-    }
+    @NotNull(message = "Insira uma data inicial válida")
+    private Date startDate;
 
-    public VoluntWork(Long id, String serviceName, String description, String instituicaoSaude, Integer vagas) {
-        this.id = id;
-        this.serviceName = serviceName;
-        this.description = description;
-        this.instituicaoSaude = instituicaoSaude;
-        this.vagas = vagas;
-    }
+    @NotNull(message = "Insira uma data final válida")
+    private Date endDate;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getServiceName() {
-        return serviceName;
-    }
-
-    public void setServiceName(String serviceName) {
-        this.serviceName = serviceName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getInstituicaoSaude() {
-        return instituicaoSaude;
-    }
-
-    public void setInstituicaoSaude(String instituicaoSaude) {
-        this.instituicaoSaude = instituicaoSaude;
-    }
-
-    public Integer getVagas() {
-        return vagas;
-    }
-
-    public void setVagas(Integer vagas) {
-        this.vagas = vagas;
-    }
+    @OneToMany(mappedBy = "voluntWork", cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonManagedReference
+    private List<Volunteer> volunteers = new ArrayList<>();
 }

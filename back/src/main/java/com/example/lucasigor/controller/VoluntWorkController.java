@@ -1,7 +1,6 @@
 package com.example.lucasigor.controller;
 
 import com.example.lucasigor.entities.VoluntWork;
-import com.example.lucasigor.entities.Volunteer;
 import com.example.lucasigor.services.VoluntWorkService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
