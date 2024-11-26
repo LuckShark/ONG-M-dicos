@@ -1,7 +1,17 @@
-<!-- No servico logar com login e senha mokado do voluntario para ir para o home caso nao vai para o login -->
-@if(true) {
+<ng-container *ngIf="isLoggedIn; else loginPage">
   <router-outlet></router-outlet>
+</ng-container>
+
+<ng-template #loginPage>
+  <app-login></app-login>
+</ng-template>
+
+
+
+<!-- No servico logar com login e senha mokado do voluntario para ir para o home caso nao vai para o login -->
+<!-- @if(true) {
+  <router-outlet></router-outlet> -->
   <!-- ai vai abrir no home, podendo redirecnionar para a lita de servicos volutarios disponiveis ou o cadastro/lista de voluntarios,
    pode ter um login adminstrador para cadastrar voluntarios. -->
-}
-<app-login></app-login>
+<!-- }
+<app-login></app-login> -->
