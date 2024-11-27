@@ -1,0 +1,33 @@
+<!-- <div class="trabalhos">
+    <h2>Trabalhos Voluntários</h2>
+    <div *ngIf="trabalhos.length === 0">
+      <p>Nenhum trabalho disponível no momento.</p>
+    </div>
+    <ul *ngIf="trabalhos.length > 0">
+      <li *ngFor="let trabalho of trabalhos">
+        <h3>{{ trabalho.serviceName }}</h3>
+        <p>{{ trabalho.description }}</p>
+        <p><strong>Instituição:</strong> {{ trabalho.instituicaoSaude }}</p>
+        <p><strong>Vagas:</strong> {{ trabalho.vagas }}</p>
+        <p><strong>Período:</strong> {{ trabalho.startDate | date:'dd/MM/yyyy' }} - {{ trabalho.endDate | date:'dd/MM/yyyy' }}</p>
+      </li>
+    </ul>
+  </div>
+   -->
+
+   <div class="trabalhos">
+    <h2>Trabalhos Voluntários</h2>
+    <div *ngIf="trabalhos.length === 0">
+      <p>Nenhum trabalho disponível no momento.</p>
+    </div>
+    <div class="card-container" *ngIf="trabalhos.length > 0">
+      <div *ngFor="let trabalho of trabalhos" class="card">
+        <h3>{{ trabalho.serviceName }}</h3>
+        <p>{{ trabalho.description }}</p>
+        <p><strong>Instituição:</strong> {{ trabalho.instituicaoSaude }}</p>
+        <p><strong>Vagas:</strong> {{ trabalho.vagas }}</p>
+        <p><strong>Período:</strong> {{ trabalho.startDate | date:'dd/MM/yyyy' }} - {{ trabalho.endDate | date:'dd/MM/yyyy' }}</p>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,49 @@
+.trabalhos {
+    margin: 2rem;
+    text-align: center;
+  
+    h2 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 2rem;
+      color: #2c3e50;
+    }
+  
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 0 2rem;
+    }
+  
+    .card {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  
+      h3 {
+        font-size: 1.5rem;
+        color: #16a085;
+        margin-bottom: 1rem;
+      }
+  
+      p {
+        font-size: 1rem;
+        color: #7f8c8d;
+        line-height: 1.6;
+        margin-bottom: 0.8rem;
+      }
+  
+      strong {
+        color: #2c3e50;
+      }
+  
+      &:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+  
