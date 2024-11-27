@@ -1,4 +1,4 @@
-package com.example.lucasigor.controller;
+package com.example.lucasigor.services.controller;
 
 
 import com.example.lucasigor.entities.Volunteer;
