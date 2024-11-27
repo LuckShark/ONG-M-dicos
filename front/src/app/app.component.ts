@@ -5,11 +5,12 @@ import { VoluntaryServicesComponent } from './pages/voluntary-services/voluntary
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from "./login/login.component";
 import { LoginService } from './login/login.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HomeComponent, VoluntaryServicesComponent, LoginComponent],
+  imports: [CommonModule, RouterOutlet, HomeComponent, VoluntaryServicesComponent, LoginComponent, HttpClientModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -21,4 +22,6 @@ export class AppComponent {
   get isLoggedIn(): boolean {
     return this.loginService.isLoggedIn();
   }
+
+  
 }

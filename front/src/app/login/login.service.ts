@@ -1,29 +1,27 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
+  private apiUrl = 'http://localhost:8080/auth/login'; // URL do seu back-end
+  private isAuthenticated = false; // Estado de autenticação
 
-  private isAuthenticated = false;
+  constructor(private http: HttpClient) {}
 
-  login(username: string, password: string):boolean {
-    console.log('Tentativa de login:', { username, password });
-    if (username === 'voluntario' && password === '123456') {
-      this.isAuthenticated = true;
-      return true;
-    }
-    return false;
+  login(username: string, password: string): Observable<any> {
+    const payload = { email: username, password: password }; // Nome dos campos do LoginDTO
+    return this.http.post<any>(this.apiUrl, payload); //faz o POST pro back carai
+  }
+
+  setLoggedIn(status: boolean): void {
+    this.isAuthenticated = status;
   }
 
   isLoggedIn(): boolean {
     return this.isAuthenticated;
   }
 
-  logout():void {
-    this.isAuthenticated = false;
-  }
-
-
-  constructor() { }
 }
