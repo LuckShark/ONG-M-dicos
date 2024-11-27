@@ -24,4 +24,10 @@ export class LoginService {
     return this.isAuthenticated;
   }
 
+  // Retorna o ID do usuário logado
+  getCurrentUserId(): number | null {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    return user?.id || null; 
+  }
+
 }

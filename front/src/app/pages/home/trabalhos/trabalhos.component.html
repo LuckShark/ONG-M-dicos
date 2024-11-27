@@ -27,6 +27,12 @@
         <p><strong>Instituição:</strong> {{ trabalho.instituicaoSaude }}</p>
         <p><strong>Vagas:</strong> {{ trabalho.vagas }}</p>
         <p><strong>Período:</strong> {{ trabalho.startDate | date:'dd/MM/yyyy' }} - {{ trabalho.endDate | date:'dd/MM/yyyy' }}</p>
+        <!-- <button (click)="subscribeToWork(trabalho.id)" [disabled]="trabalho.isSubscribed">
+            {{ trabalho.isSubscribed ? 'Inscrito' : 'Se inscrever' }}
+          </button> -->
+          <button (click)="subscribeToWork(trabalho.id)" class="subscribe-button">
+            Se inscrever
+          </button>
       </div>
     </div>
   </div>

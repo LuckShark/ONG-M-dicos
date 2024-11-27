@@ -26,13 +26,24 @@ export class LoginComponent {
     this.loginService.login(this.username, this.password).subscribe({
       next: (response) => {
         console.log('Login bem-sucedido!', response);
-        this.loginService.setLoggedIn(true); // Atualiza o estado de autenticação
+
+        //Salvar as informações no LOCALSTORAGE
+        localStorage.setItem(
+          'user',
+          JSON.stringify({id: response.id, email: response.email})
+        );
+
+        // Continuando, Atualiza o estado de autenticação
+        this.loginService.setLoggedIn(true); 
         this.loginError = false;
-        this.router.navigate(['/home']); // Redireciona para a página inicial
+        alert('Login realizado com sucesso!');
+        // Redireciona para a página inicial
+        this.router.navigate(['/home']); 
       },
       error: (err) => {
         console.error('Erro no login:', err);
         this.loginError = true;
+        alert('Credenciais inválidas. Por favor, tente novamente.');
       },
     });
     
