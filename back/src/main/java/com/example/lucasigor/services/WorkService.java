@@ -15,28 +15,26 @@ public class WorkService {
     @Autowired
     private WorkRepository repository;
 
-    //GET ALL jobs
     public List<Work> findAll() {
-        return repository.findAll();
+
+        List<Work> works = repository.findAll();
+        works.forEach(work -> work.setVagasOcupadas(work.getWorkVolunteers().size()));
+        return works;
     }
 
-    //GET job BY ID
     public Work findById(Long id) {
         Optional<Work> result = repository.findById(id);
         return result.orElseThrow(() -> new RuntimeException("Trabalho não encontrado"));
     }
 
-    //POST - New Job
     public Work save(Work work) {
         return repository.save(work);
     }
 
-    //DELETE - Excluir Job
     public void delete(Long id) {
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException("Trabalho não encontrado com o id: " + id);
         }
         repository.deleteById(id);
     }
-
 }

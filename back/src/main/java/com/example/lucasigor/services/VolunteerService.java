@@ -15,23 +15,19 @@ public class VolunteerService {
     @Autowired
     private VolunteerRepository repository;
 
-    //GET ALL
     public List<Volunteer> findAll() {
         return repository.findAll();
     }
 
-    //GET BY ID
     public Volunteer findById(Long id) {
         Optional<Volunteer> result = repository.findById(id);
         return result.orElseThrow(() -> new RuntimeException("Voluntário não encontrado"));
     }
 
-    //POST - New volunteer
     public Volunteer save(Volunteer volunteer) {
         return repository.save(volunteer);
     }
 
-    //PUT - Update volunteer
     public Volunteer update(Long id, Volunteer updatedVolunteer) {
         Volunteer existingVolunteer = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Voluntário não encontrado com id: " + id));
@@ -45,7 +41,6 @@ public class VolunteerService {
         return repository.save(existingVolunteer);
     }
 
-    //DELETE - Excluir voluntário
     public void delete(Long id) {
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException("Voluntário não encontrado com o id: " + id);

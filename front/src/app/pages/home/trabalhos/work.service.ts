@@ -11,17 +11,7 @@ export class WorkService {
 
   constructor(private http: HttpClient) {}
 
-  //Pega a lista de trabalhos voluntários
   getWorks(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
-
-
-  //Inscreve um voluntário em um trabalho
-  subscribeToWork(workId: number, volunteerId: number): Observable<any> {
-    const payload = { workId, volunteerId }; //esse é o objeto do backend
-    return this.http.post<any>(`${this.apiUrl}/work-volunteers/subscribe`, payload);
-  }
-  
-
 }

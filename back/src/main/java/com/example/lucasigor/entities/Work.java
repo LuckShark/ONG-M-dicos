@@ -18,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "tb_work")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Work {
 
     @Id
@@ -35,6 +36,8 @@ public class Work {
 
     @NotNull(message = "O número de vagas é obrigatório")
     private Integer vagas;
+
+    private Integer vagasOcupadas;
 
     @NotNull(message = "Insira uma data inicial válida")
     private Date startDate;

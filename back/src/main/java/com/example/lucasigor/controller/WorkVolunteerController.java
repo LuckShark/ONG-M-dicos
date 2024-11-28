@@ -1,4 +1,4 @@
-package com.example.lucasigor.services.controller;
+package com.example.lucasigor.controller;
 
 import com.example.lucasigor.dto.SubscribeRequest;
 import com.example.lucasigor.entities.Volunteer;
@@ -33,11 +33,17 @@ public class WorkVolunteerController {
 
     @PostMapping("/subscribe")
     public ResponseEntity<?> subscribeToWork(@RequestBody SubscribeRequest request) {
-        Optional<Work> workOptional = workRepository.findById(request.getWorkId());
-        Optional<Volunteer> volunteerOptional = volunteerRepository.findById(request.getVolunteerId());
+        Optional<Work> work = workRepository.findById(request.getWorkId());
+        Optional<Volunteer> volunteer = volunteerRepository.findById(request.getVolunteerId());
 
-        if (workOptional.isEmpty() || volunteerOptional.isEmpty()) {
+        if (work.isEmpty() || volunteer.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Trabalho ou voluntário não encontrado.");
+        }
+
+        work.get().setVagasOcupadas(work.get().getWorkVolunteers().size());
+
+        if (work.get().getVagasOcupadas() >= work.get().getVagas()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Vagas esgotadas.");
         }
 
         if (workVolunteerRepository.existsByWorkIdAndVolunteerId(request.getWorkId(), request.getVolunteerId())) {
@@ -45,29 +51,10 @@ public class WorkVolunteerController {
         }
 
         WorkVolunteer workVolunteer = new WorkVolunteer();
-        workVolunteer.setWork(workOptional.get());
-        workVolunteer.setVolunteer(volunteerOptional.get());
+        workVolunteer.setWork(work.get());
+        workVolunteer.setVolunteer(volunteer.get());
         workVolunteerRepository.save(workVolunteer);
 
-        //Ele fica dando uns erros com JSON então tive que retornar um objeto JSON com a mensagem de sucesso
-        return ResponseEntity.ok(new ApiResponse("Inscrição realizada com sucesso"));
+        return ResponseEntity.ok(work);
     }
-
-    //Mais uma porra só pra encapsular a mensagem de resposta
-    public static class ApiResponse {
-        private String message;
-
-        public ApiResponse(String message) {
-            this.message = message;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
-    }
-
 }

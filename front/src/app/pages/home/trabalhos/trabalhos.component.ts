@@ -29,24 +29,26 @@ export class TrabalhosComponent implements OnInit {
         this.trabalhos = data; // Atualiza os trabalhos no array
       },
       error: (err) => {
-        console.error('Erro ao carregar oportunidades: ', err);
+        console.log(err);
+        
+        console.error('Erro ao carregar oportunidades: ', err.error);
       }
     });
   }
 
   subscribeToWork(workId: number): void {
-    const volunteerId = this.getVolunteerId(); // Pega o ID do voluntário (que já foi armazenado no localStorage)
+    const volunteerId = this.getVolunteerId(); 
 
     if (volunteerId) {
       this.volunteerWorkService.subscribeToWork(workId, volunteerId).subscribe({
         next: (response) => {
           console.log("Responta do servidor:", response);
           alert(response.message);
-          this.loadTrabalhos(); // Atualiza a lista de trabalhos
+          this.loadTrabalhos(); 
         },
         error: (err) => {
-          console.error('Erro ao realizar inscrição: ', err);
-          alert(err.error?.message || 'Erro ao realizar inscrição.');
+          console.error('Erro ao realizar inscrição: ', err.error);
+          alert(err.error|| 'Erro ao realizar inscrição.');
         },
       });
     } else {
