@@ -30,7 +30,7 @@ export class LoginComponent {
         //Salvar as informações no LOCALSTORAGE
         localStorage.setItem(
           'user',
-          JSON.stringify({id: response.id, email: response.email})
+          JSON.stringify({id: response.id, email: response.email, name: response.name})
         );
 
         // Continuando, Atualiza o estado de autenticação

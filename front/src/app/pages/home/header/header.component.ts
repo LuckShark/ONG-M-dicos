@@ -9,4 +9,12 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
+  name: string | null = 'Fulano';
+
+  constructor() {}
+
+  ngOnInit(): void {
+    const user = localStorage.getItem('user');
+    this.name  = user != null ? JSON.parse(user).name : 'Fulano';   
+  }
 }

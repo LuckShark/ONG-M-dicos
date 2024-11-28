@@ -19,9 +19,6 @@ export class AppComponent {
   constructor(private loginService: LoginService) {}
 
   get isLoggedIn(): boolean {
-
-    console.log(this.loginService.isLoggedIn());
-    
     return this.loginService.isLoggedIn();
   }
 
